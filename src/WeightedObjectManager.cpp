@@ -7,6 +7,7 @@
 //
 
 #include "WeightedObjectManager.h"
+#include <utility>
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -83,7 +84,7 @@ void WeightedObjectManager::setup(vector<Weightable*> allObjects){
 	}
 	//ofLogNotice("WeightedObjectManager") << "shownObjects: " << shownObjects.size();
 	onScreenObjects.clear();
-	allWeightedObjects = allObjects;
+	allWeightedObjects = std::move(allObjects);
 }
 
 
@@ -186,7 +187,7 @@ Weightable* WeightedObjectManager::getNextObject(bool itsOkIfItsOnScreen){
 	return getNextObject(itsOkIfItsOnScreen, ignoreList);
 }
 
-Weightable* WeightedObjectManager::getNextObject(bool itsOkIfItsOnScreen, vector<Weightable*> ignoreList){
+Weightable* WeightedObjectManager::getNextObject(bool itsOkIfItsOnScreen, const vector<Weightable*>& ignoreList){
 
 	WeightedObjectsSet::iterator it;
 	Weightable* myResult = NULL;
